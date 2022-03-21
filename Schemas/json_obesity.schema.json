@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/happiness.schema.json",
+  "title": "World average obesity per country",
+  "description": "Information about world obesity per country",
+  "required": [ "obesityBothSexes", "obesityMale", "obesityFemale"],
+  "type": "object",
+  "properties":{
+    "country":{
+        "description": "Name of country",
+        "type": "string"
+    },
+  	"obesityBothSexes":{
+  			"description": "average obesity for both sexes per country",
+  			"type": "double"
+  		},
+  		"obesityMale":{
+  			"description": "average male obesity per country",
+  			"type": "double"
+  		},
+  		"obesityFemale":{
+  			"description": "average female obesity per country",
+  			"type": "double"
+  		},
+  	}
+} 

@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/happiness.schema.json",
+  "title": "World average wages per country",
+  "description": "Information about world wages per country",
+  "required": [ "currency", "value"],
+  "type": "object",
+  "properties":{
+  		"currency":{
+  			"description": "currency of average wages",
+  			"type": "string",
+        "minLength": 1,
+        "maxLength": 3
+  		},
+      "value":{
+        "description": "wages per country",
+        "type": ["integer", "null"],
+
+      }
+
+
+  	}
+} 

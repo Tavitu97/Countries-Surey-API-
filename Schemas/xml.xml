@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<worldOverview>
+	<country>Netherlands</country>
+	<happines>
+		<rank>1</rank>
+		<score>10.0</score>
+	</happines>
+	<wages>
+		<currency>eur</currency>
+		<value>60000</value>
+	</wages>
+	<obesity>
+		<bothSexes>4.3</bothSexes>
+		<male>3.1</male>
+		<female>4.3</female>>
+	</obesity>
+</worldOverview>

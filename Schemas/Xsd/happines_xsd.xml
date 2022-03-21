@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="happiness_overview">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="item"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="item">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="rank" type="xs:integer"/>
+        <xs:element name="country" type="xs:string"/>
+        <xs:element name="score" type="xs:float"/>
+        <xs:element name="gdp" type="xs:float"/>
+        <xs:element name="social_support" type="xs:float"/>
+        <xs:element name="healthy_life_expectancy" type="xs:float"/>
+        <xs:element name="life_choices_freedom" type="xs:float"/>
+        <xs:element name="generosity" type="xs:float"/>
+        <xs:element name="corruption_perception" type="xs:float"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
