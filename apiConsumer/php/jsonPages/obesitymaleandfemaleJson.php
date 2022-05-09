@@ -13,6 +13,7 @@
     
 	 <?php
      $dataPoints1 = [];
+     $dataPoints2 = [];
 	 	$population = curl_init();
         $url = 'http://127.0.0.1:5000/obesity';
         
@@ -25,10 +26,10 @@
 
         ?>
          
-        <div id="chartContainer1" style="height: auto; width: 100%; margin-bottom:100px;"></div>
+         <div id="chartContainer" style="height: auto; width: 100%; margin-bottom:100px;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-        <div style="text-align:center; margin-top:480px;"><button><a href="obesitymaleandfemaleJson.php">Obesity Male and Female Difference</a></button></div>
+        <div style="text-align:center; margin-top:480px;"><button><a href="obesityJson.php">Countries with the biggest obesity</a></button></div>
 
         <h1>Country Obesity</h1>
         <p>click on header to sort(asc/desc)</p>
@@ -66,9 +67,10 @@
         for($i = 0; $i < count($informationReceived['response']); $i++){
             $information =  $informationReceived["response"][$i]['countryOverview'];
 
-            if($information['both_sexes'] > 40 && !is_null($information['both_sexes']))
+            if($information['both_sexes'] > 40 && $information['both_sexes'] != NULL)
             {
-               array_push($dataPoints1,array("y" => $information['both_sexes'],"label" => $information['country']));
+               array_push($dataPoints1,array("label" => $information['country'],"y" => $information['male']));
+               array_push($dataPoints2,array("label" => $information['country'],"y" => $information['female']));
             }
 
                  //insert data from json
@@ -92,33 +94,52 @@
 <script src="../../vendor/jq/jquery-3.2.0.min.js"></script>
 <script src="../../javascript/map.js"></script>
 <script>
-        window.onload = function()
-        {
+            window.onload = function () {
         
-            var chart1 = new CanvasJS.Chart("chartContainer1", {
-                animationEnabled: true,
-                title:{
-                    text: "Countries with the biggest obesity among their citizens"
-                },
-                axisY: {
-                    title: "Obesity",
-                    includeZero: true,
-                    prefix: "",
-                    suffix:  ""
-                },
-                data: [{
-                    type: "bar",
-                    yValueFormatString: "",
-                    indexLabel: "{y}",
-                    indexLabelPlacement: "inside",
-                    indexLabelFontWeight: "bolder",
-                    indexLabelFontColor: "white",
-                    dataPoints: <?php echo json_encode($dataPoints1, JSON_NUMERIC_CHECK); ?>
-                }]
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            theme: "light2",
+            title:{
+                text: "Comparasion between male and female obesity in the countries with the biggest obesity among their citizens"
+            },
+            axisY:{
+                includeZero: true
+            },
+            legend:{
+                cursor: "pointer",
+                verticalAlign: "center",
+                horizontalAlign: "right",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                type: "column",
+                name: "Male",
+                indexLabel: "{y}",
+                yValueFormatString: "#0.##",
+                showInLegend: true,
+                dataPoints: <?php echo json_encode($dataPoints1); ?>
+            },{
+                type: "column",
+                name: "Female",
+                indexLabel: "{y}",
+                yValueFormatString: "#0.##",
+                showInLegend: true,
+                dataPoints: <?php echo json_encode($dataPoints2); ?>
+            }]
         });
-        chart1.render();
- 
-       }
+        chart.render();
+        
+        function toggleDataSeries(e){
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            }
+            else{
+                e.dataSeries.visible = true;
+            }
+            chart.render();
+        }
+        
+        }
 </script>
 </body>
 </html>

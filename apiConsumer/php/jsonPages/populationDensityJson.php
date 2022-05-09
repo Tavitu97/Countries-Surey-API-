@@ -89,8 +89,8 @@
         <div id="chartContainer" style="height: auto; width: 100%; margin-bottom:100px;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-        <div style="text-align:center; margin-top:480px;"><button><a href="popoulationTopCountriesGraphJson.php">Top Countries with the highest population </a></button></div>
-        <div style="text-align:center; margin-top:20px;"><button><a href="populationDensityJson.php">Top countries with highest population density</a></button></div>
+        <div style="text-align:center; margin-top:480px;"><button><a href="popoulationTopCountriesGraphJson.php">Top Ten Countries with the highest population </a></button></div>
+        <div style="text-align:center; margin-top:20px;"><button><a href="populationJson.php">Top youngest countries </a></button></div>
 
 
         <div class="table" style="margin-top:100px;">
@@ -131,9 +131,14 @@
         for($i = 0; $i < count($informationReceived['response']); $i++){
             $information =  $informationReceived["response"][$i]['countryOverview'];
 
-            if($information['med_age'] < 19 && !is_null($information['med_age']))
+            if($information['population_value'] != 0 && $information['land_area'] !=0)
             {
-               array_push($dataPoints1,array("y" => $information['med_age'],"label" => $information['country']));
+            $density = $information['population_value'] / $information['land_area'];
+            }
+            //echo $density;
+           if($density <  10)
+            {
+               array_push($dataPoints1,array("y" => $density,"label" => $information['country']));
             }
 
 
@@ -152,7 +157,7 @@
 
         }
                     
-                    
+                 echo json_encode($dataPoints1);   
                 
 	 ?>
 	 </div>
@@ -166,10 +171,10 @@
             var chart1 = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
                 title:{
-                    text: "Countries with the youngest age average"
+                    text: "Countries with the highest population density"
                 },
                 axisY: {
-                    title: "Age Average",
+                    title: "Density = Population / Land Area",
                     includeZero: true,
                     prefix: "",
                     suffix:  ""

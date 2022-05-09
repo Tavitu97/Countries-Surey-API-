@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="population_overview">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="item"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="item">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="country" type="xs:string"/>
+        <xs:element name="population_value" type="xs:float"/>
+        <xs:element name="yearly_change" type="xs:float"/>
+        <xs:element name="land_area" type="xs:float"/>
+        <xs:element name="migrants" type="xs:float"/>
+        <xs:element name="med_age" type="xs:float"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

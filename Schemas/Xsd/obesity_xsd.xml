@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="obesity_overview">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="item"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="item">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="country" type="xs:string"/>
+        <xs:element name="both_sexes" type="xs:float"/>
+        <xs:element name="male" type="xs:float"/>
+        <xs:element name="female" type="xs:float"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

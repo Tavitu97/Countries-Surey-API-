@@ -1,6 +1,8 @@
 from flask_restful import Resource
 from settings import *
+from sqlalchemy import desc
 
+#db initialization
 db = SQLAlchemy(app)
 
 class ObesityRecord(db.Model):

@@ -89,7 +89,7 @@
         <div id="chartContainer" style="height: auto; width: 100%; margin-bottom:100px;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-        <div style="text-align:center; margin-top:480px;"><button><a href="popoulationTopCountriesGraphJson.php">Top Countries with the highest population </a></button></div>
+        <div style="text-align:center; margin-top:480px;"><button><a href="populationJson.php">Top youngest countries </a></button></div>
         <div style="text-align:center; margin-top:20px;"><button><a href="populationDensityJson.php">Top countries with highest population density</a></button></div>
 
 
@@ -131,9 +131,9 @@
         for($i = 0; $i < count($informationReceived['response']); $i++){
             $information =  $informationReceived["response"][$i]['countryOverview'];
 
-            if($information['med_age'] < 19 && !is_null($information['med_age']))
+            if($information['population_value'] > 99770000 && !is_null($information['population_value']))
             {
-               array_push($dataPoints1,array("y" => $information['med_age'],"label" => $information['country']));
+               array_push($dataPoints1,array("y" => $information['population_value'],"label" => $information['country']));
             }
 
 
@@ -166,10 +166,10 @@
             var chart1 = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
                 title:{
-                    text: "Countries with the youngest age average"
+                    text: "Top Countries with the highest population"
                 },
                 axisY: {
-                    title: "Age Average",
+                    title: "Population",
                     includeZero: true,
                     prefix: "",
                     suffix:  ""

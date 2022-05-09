@@ -64,6 +64,30 @@ xmltodict==0.11.0
 
 sqlite was used for this project. To view the db file, sqlite will need to be installed on your machine. 
 
+# Virtual Environment 
+
+    Virtual environments are independent groups of Python libraries, one for each project. Packages installed for one project will not affect other projects or the operating system’s packages.
+    To create a virtual environment, follow the next steps:
+    1.	Navigate to the project location:
+    Open the cmd and navigate via cd command to the directory where the API is located. 
+    In this specific case:
+    cd D:\Github\Countries-Survey-API-
+    2.	Create an environment 
+    In the cmd, insert the following command:
+    py -3 -m venv venv
+    Your cmd will change to show the name of the activated environment
+
+    3.	Activate the environment 
+    In the cmd insert the next command:
+    venv\Scripts\activate
+
+    4.	Install the requirements
+    In the cmd insert the next command:
+    venv\Scripts\activate
+
+    5.	Install the requirements
+    To install all the modules required for this API, activate the environment in the API folder and run the following command in the cmd:
+                 pip install -r requirements.txt .
 
 # Run the API 
 
@@ -81,6 +105,12 @@ The data comes in different types depending on headers: application/json, text/x
 
 # Consumer
 
-The consumer was build using PHP and JS. PHP to read the incomming data, and JS for the visualization part. 
+The consumer was build using PHP and JS. The reason behind this was to expand the knowledge and skills with scripting programming languages in reading and work with data which is available in JSON /XML format. 
+To run the consumer, Xampp will need to be installed on your machine. After the installation just move the apiConsumer folder into Xampp folder, in htdocs folder.
+To open the consumer, start xampp control panel and start the Apache and MySql.
+After xampp modules are up and running, open a browser and typle in the search bar:
+http://localhost:8080/apiConsumer/ 
+In this case, I used port 8080. If you would like to change it, press the config button for the Apache module and change it. 
 
-To run the consumer, just put the apiConsumer folder in Xampp and run it.
+
+# For more information please check the UsageDocumentation.docx 

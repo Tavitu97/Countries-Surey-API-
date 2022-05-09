@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "title": "World Obesity",
+  "description": "Information about world obesity",
+  "required": ["country", "both_sexes", "male", "female"],
+  "type": "object",
+  "properties":{
+    "country":{
+      "description": "Name of country",
+      "type": "string"
+    },
+    "both_sexes":{
+      "description": "Both sexes obesity",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100.0,
+       "multipleOf": 0.001
+    },
+    "male":{
+      "description": "male obesity",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100.0,
+       "multipleOf": 0.001
+    },
+    "female":{
+      "description": "female obesity ",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100.0,
+       "multipleOf": 0.001
+    }
+}
+}

@@ -1,0 +1,48 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "title": "World Population Overview",
+    "description": "Information about world population per country",
+    "required": ["country", "popoulation_value", "yearly_change", "land_area", "migrants", "med_age"],
+    "type": "object",
+    "properties":{
+        "country":{
+          "description": "Name of country",
+          "type": "string"
+        },
+        "population_value":{
+          "description": "The population of a country",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1400000000,
+           "multipleOf": 0.001
+        },
+        "yearly_change":{
+          "description": "The change of population per year",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 50.0,
+           "multipleOf": 0.001
+        },
+        "land_area":{
+          "description": "The land area of a country ",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1000000,
+           "multipleOf": 0.001
+        },
+        "migrants":{
+          "description": "The number of mmigrants in a year",
+          "type": "number",
+          "minimum": -100000,
+          "maximum": 1000000,
+           "multipleOf": 0.001
+        },
+        "med_age":{
+          "description": "Age average for a country ",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 50,
+           "multipleOf": 0.001
+        }
+    }
+  }

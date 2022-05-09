@@ -16,9 +16,30 @@
 	</div>
     
 	 <?php
-        $dataPoints1 = [];
-        $dataPoints2 = [];
-        $dataPoints3 = []; 
+       // $dataPoints1 = [];
+      //  $dataPoints2 = [];
+
+       $dataPoints1 = array(
+        array("label"=> "Finland", "y"=> 7.768),
+        array("label"=> "Denmark", "y"=> 7.600),
+        array("label"=> "Norway", "y"=> 7.494),
+        array("label"=> "Iceland", "y"=> 7.488),
+        array("label"=> "Netherlands", "y"=> 7.488),
+        array("label"=> "Switzerland", "y"=> 7.343),
+        array("label"=> "Sweden", "y"=> 7.343)
+    );
+    $dataPoints2 = array(
+        array("label"=> "Finland", "y"=> 0.596),
+        array("label"=> "Denmark", "y"=> 0.592),
+        array("label"=> "Norway", "y"=> 0.603),
+        array("label"=> "Iceland", "y"=> 0.591),
+        array("label"=> "Netherlands", "y"=> 0.557),
+        array("label"=> "Switzerland", "y"=> 0.572),
+        array("label"=> "Sweden", "y"=> 0.574)
+    );
+   
+
+
 	 	$population = curl_init();
         $url = 'http://127.0.0.1:5000/happiness';
         
@@ -33,10 +54,9 @@
 
        
 
-        <div id="chartContainer1" style="height: auto; width: 100%; margin-bottom:100px;"></div>
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-        <div style="text-align:center; margin-top:480px;"><button><a href="happinessLifeJson.php">Life expectancy graphic</a></button></div>
+        <div style="text-align:center; margin-top:180px;"><button><a href="happinessJson.php">Top 10 Happy Countries</a></button></div>
 
 
         <div style="margin-top:100px;"> 
@@ -84,15 +104,17 @@
         {
             $information =  $informationReceived["response"][$i]['countryOverview'];
 
+            
            
-           
-            // top 10 happy countries 
-            if( $i <= 9)
+            // top 10 countries 
+            if( $i <= 2)
             {
-              array_push($dataPoints1,array("y" => doubleval($information['score']),"label" => $information['country']));
+              //array_push($dataPoints1,array("x" => $information['country'],"y" => $information['score'] ));
+              //array_push($dataPoints1,array("x" => $information['country'],"y" => $information['healthy_life_expectancy'] ));
+              
             }
             
-
+                 echo $information['country'];
 
                  //insert data from json
                  echo '<div class="table-row">';
@@ -114,7 +136,7 @@
 
         }
            
-                    
+       // echo json_encode($dataPoints2);        
         
 	 ?>
              
@@ -129,33 +151,54 @@
 
 <!-- Top ten happy countries Graph -->
 <script>
-        window.onload = function()
-        {
-        
-            var chart1 = new CanvasJS.Chart("chartContainer1", {
-                animationEnabled: true,
-                title:{
-                    text: "Top ten happy countries"
-                },
-                axisY: {
-                    title: "Happiness score",
-                    includeZero: true,
-                    prefix: "",
-                    suffix:  ""
-                },
-                data: [{
-                    type: "bar",
-                    yValueFormatString: "",
-                    indexLabel: "{y}",
-                    indexLabelPlacement: "inside",
-                    indexLabelFontWeight: "bolder",
-                    indexLabelFontColor: "white",
-                    dataPoints: <?php echo json_encode($dataPoints1, JSON_NUMERIC_CHECK); ?>
-                }]
-        });
-        chart1.render();
+    window.onload = function () {
  
-       }
+ var chart = new CanvasJS.Chart("chartContainer", {
+     animationEnabled: true,
+     theme: "light2",
+     title:{
+         text: "Countries Happiness Score and the correlation with Life expectancy"
+     },
+     axisY:{
+         includeZero: true
+     },
+     legend:{
+         cursor: "pointer",
+         verticalAlign: "center",
+         horizontalAlign: "right",
+         itemclick: toggleDataSeries
+     },
+     data: [{
+         type: "column",
+         name: "Happiness Score",
+         indexLabel: "{y}",
+         yValueFormatString: "#.###",
+         showInLegend: true,
+         dataPoints: <?php echo json_encode($dataPoints1, JSON_NUMERIC_CHECK); ?>
+     },{
+         type: "column",
+         name: "Life Expectancy",
+         indexLabel: "{y}",
+         yValueFormatString: "#0.###",
+         showInLegend: true,
+         dataPoints: <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>
+     }]
+ });
+ chart.render();
+  
+ function toggleDataSeries(e){
+     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+         e.dataSeries.visible = false;
+     }
+     else{
+         e.dataSeries.visible = true;
+     }
+     chart.render();
+ }
+  
+ }
+    
+    
 </script>
 </body>
 </html>
